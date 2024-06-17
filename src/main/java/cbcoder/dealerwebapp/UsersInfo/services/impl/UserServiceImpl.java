@@ -14,15 +14,14 @@ import cbcoder.dealerwebapp.UsersInfo.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedModel;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.*;
-
-import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * UserServiceImpl class implements UserService interface and provides the implementation of the methods declared in the interface.
@@ -76,7 +75,7 @@ public class UserServiceImpl implements UserService {
 			throw new UserNotFoundException(USER_NOT_FOUND + userId);
 		}
 		User userToUpdate = userOptional.get();
-		if (!userDto.getEmail().equals(userToUpdate.getEmail()) && !Objects.deepEquals(userDto.getId(), userToUpdate.getUserId())) {
+		if (!userDto.getEmail().equals(userToUpdate.getEmail()) && !Objects.deepEquals(userDto.getUserId(), userToUpdate.getUserId())) {
 			throw new EmailNotBindingException("Email not matching with the user email!");
 		}
 		userToUpdate.setFirstName(userDto.getFirstName());
@@ -167,7 +166,7 @@ public class UserServiceImpl implements UserService {
 	 * @return the user information fetched from the database based on the page number and the page size.
 	 */
 	@Override
-	public Page<User>  getAllUsers(Pageable pageable) {
+	public Page<User> getAllUsers(Pageable pageable) {
 		Page<User> users = userRepository.findAll(pageable);
 		if (users.isEmpty()) {
 			throw new UserNotFoundException("No users found in the database!");

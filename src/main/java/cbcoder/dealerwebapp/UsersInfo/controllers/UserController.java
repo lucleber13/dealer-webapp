@@ -11,10 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * UserController class is the controller class for the User entity. It is responsible for handling the HTTP requests for the User entity.
+ * In the class SecurityConfig has added an annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
+ * This annotation is used to enable Spring Data Web Support for the application.
+ * It is used to configure the page serialization mode for Spring Data Web Support. When using Page serialization mode VIA_DTO,
+ * the Pageable argument in the controller methods will be serialized to a DTO object. This way avoiding the response
+ * with json well formatted.
  *
  * @author : Cleber Blabinote
  * @version 1.0

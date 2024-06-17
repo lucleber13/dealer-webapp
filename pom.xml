@@ -17,7 +17,7 @@
         <java.version>22</java.version>
         <spring-ai.version>1.0.0-M1</spring-ai.version>
         <jjwt.version>0.12.5</jjwt.version>
-        <modelmapper.version>3.1.1</modelmapper.version>
+        <modelmapper.version>3.2.0</modelmapper.version>
     </properties>
     <dependencies>
         <dependency>
@@ -92,6 +92,13 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -102,6 +109,13 @@
             </plugin>
         </plugins>
     </build>
-    
+    <repositories>
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
+
 
 </project>

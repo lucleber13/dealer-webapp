@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class UserDto {
-	private Long id;
+	private Long userId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -24,8 +24,8 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(Long id, String firstName, String lastName, String email, String password, boolean isEnabled, Set<Role> roles) {
-		this.id = id;
+	public UserDto(Long userId, String firstName, String lastName, String email, String password, boolean isEnabled, Set<Role> roles) {
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -34,12 +34,12 @@ public class UserDto {
 		this.roles = roles;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -110,18 +110,18 @@ public class UserDto {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof UserDto user)) return false;
-		return Objects.equals(getId(), user.getId());
+		return Objects.equals(getUserId(), user.getUserId());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(getId());
+		return Objects.hashCode(getUserId());
 	}
 
 	@Override
 	public String toString() {
 		return "UserDto{" +
-				"id=" + id +
+				"id=" + userId +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
 				", email='" + email + '\'' +
@@ -132,4 +132,5 @@ public class UserDto {
 				", roles=" + roles +
 				'}';
 	}
+
 }
