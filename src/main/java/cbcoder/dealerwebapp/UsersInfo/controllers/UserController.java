@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * UserController class is the controller class for the User entity. It is responsible for handling the HTTP requests for the User entity.
  *
@@ -38,12 +40,12 @@ public class UserController {
 	 * @param sortBy   determines the sorting order of the users to be returned.
 	 * @return a ResponseEntity containing a Page of Users.
 	 */
-	@GetMapping("/admin/all")
+	@GetMapping(value = "/admin/all", produces = "application/json")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Page<User>> getAllUsers(
 			@RequestParam(defaultValue = "0") Integer pageNo,
 			@RequestParam(defaultValue = "10") Integer pageSize,
-			@RequestParam(defaultValue = "id") String sortBy) {
+			@RequestParam(defaultValue = "userId") String sortBy) {
 
 		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 		return ResponseEntity.ok(userService.getAllUsers(pageable));
@@ -57,7 +59,7 @@ public class UserController {
 	 * @param userId determines the id of the user to be returned.
 	 * @return a ResponseEntity containing the User.
 	 */
-	@PutMapping("/{userId}")
+	@PutMapping(value = "/{userId}", produces = "application/json")
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALES', 'ROLE_WORKSHOP', 'ROLE_VALETER')")
 	public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
 		return ResponseEntity.ok(userService.updateUser(userId, userDto));
@@ -70,7 +72,7 @@ public class UserController {
 	 * @param userId determines the id of the user to be deleted.
 	 * @return a ResponseEntity containing a message indicating the success of the operation.
 	 */
-	@PutMapping("/admin/{userId}")
+	@PutMapping(value = "/admin/{userId}", produces = "application/json")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<User> adminUpdateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
 		return ResponseEntity.ok(userService.adminUpdateUser(userId, userDto));
@@ -83,7 +85,7 @@ public class UserController {
 	 * @param userId determines the id of the user to be deleted.
 	 * @return a ResponseEntity containing a message indicating the success of the operation.
 	 */
-	@DeleteMapping("/admin/{userId}")
+	@DeleteMapping(value="/admin/{userId}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
 		return ResponseEntity.ok(userService.deleteUser(userId));
@@ -97,7 +99,7 @@ public class UserController {
 	 * @param userId determines the id of the user to be returned.
 	 * @return a ResponseEntity containing the User.
 	 */
-	@GetMapping("/admin/{userId}")
+	@GetMapping(value = "/admin/{userId}",  produces = "application/json")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<User> getUserById(@PathVariable Long userId) {
 		return ResponseEntity.ok(userService.getUserById(userId));

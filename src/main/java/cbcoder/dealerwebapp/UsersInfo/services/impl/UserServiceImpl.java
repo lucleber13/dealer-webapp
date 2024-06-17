@@ -3,6 +3,7 @@ package cbcoder.dealerwebapp.UsersInfo.services.impl;
 import cbcoder.dealerwebapp.UsersInfo.Dtos.UserDto;
 import cbcoder.dealerwebapp.UsersInfo.exceptions.EmailNotBindingException;
 import cbcoder.dealerwebapp.UsersInfo.exceptions.OperationNotPermittedException;
+import cbcoder.dealerwebapp.UsersInfo.exceptions.PasswordTooShortException;
 import cbcoder.dealerwebapp.UsersInfo.exceptions.UserNotFoundException;
 import cbcoder.dealerwebapp.UsersInfo.model.Role;
 import cbcoder.dealerwebapp.UsersInfo.model.User;
@@ -13,14 +14,15 @@ import cbcoder.dealerwebapp.UsersInfo.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+
+import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
 
 /**
  * UserServiceImpl class implements UserService interface and provides the implementation of the methods declared in the interface.
@@ -114,6 +116,9 @@ public class UserServiceImpl implements UserService {
 			if (userDto.getEmail().equals(userToUpdate.getEmail())) {
 				userToUpdate.setFirstName(userDto.getFirstName());
 				userToUpdate.setLastName(userDto.getLastName());
+				if (userDto.getPassword().length() < 8) {
+					throw new PasswordTooShortException("Password must be at least 8 characters long");
+				}
 				userToUpdate.setPassword(passwordEncoder.encode(userDto.getPassword()));
 				userToUpdate.setUpdatedAt(LocalDateTime.now());
 				return userRepository.save(userToUpdate);
@@ -162,7 +167,7 @@ public class UserServiceImpl implements UserService {
 	 * @return the user information fetched from the database based on the page number and the page size.
 	 */
 	@Override
-	public Page<User> getAllUsers(Pageable pageable) {
+	public Page<User>  getAllUsers(Pageable pageable) {
 		Page<User> users = userRepository.findAll(pageable);
 		if (users.isEmpty()) {
 			throw new UserNotFoundException("No users found in the database!");
