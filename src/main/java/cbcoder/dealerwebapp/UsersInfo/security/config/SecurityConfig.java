@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * SecurityConfig class is the configuration class for the security of the application. It is responsible for configuring the security of the application.
- * In the class SecurityConfig has added a annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
+ * In the class SecurityConfig has added an annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
  * This annotation is used to enable Spring Data Web Support for the application.
  * It is used to configure the page serialization mode for Spring Data Web Support. When using Page serialization mode VIA_DTO,
  * the Pageable argument in the controller methods will be serialized to a DTO object. This way avoiding the response
@@ -71,7 +71,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(authorizeRequests ->
 						authorizeRequests
 								.requestMatchers("/auth/**").permitAll()
-								.requestMatchers("/users/admin/**").hasRole("ADMIN")
+								.requestMatchers("/admin/**").hasRole("ADMIN")
 								.requestMatchers("/users/**").hasAnyRole("SUPERADMIN", "ADMIN", "SALES", "WORKSHOP", "VALETER")
 								.requestMatchers("/superadmin/**").hasRole("SUPERADMIN")
 								.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
