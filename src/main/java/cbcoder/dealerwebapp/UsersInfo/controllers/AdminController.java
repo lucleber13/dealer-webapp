@@ -31,7 +31,7 @@ public class AdminController {
      * @return a ResponseEntity containing a Page of Users.
      */
     @GetMapping(value = "/all", produces = "application/json")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_SUPERADMIN')")
     public ResponseEntity<Page<User>> getAllUsers(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
@@ -61,7 +61,7 @@ public class AdminController {
      * @param userId determines the id of the user to be deleted.
      * @return a ResponseEntity containing a message indicating the success of the operation.
      */
-    @DeleteMapping(value="/delete/{userId}")
+    @DeleteMapping(value = "/delete/{userId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.deleteUser(userId));
@@ -75,7 +75,7 @@ public class AdminController {
      * @param userId determines the id of the user to be returned.
      * @return a ResponseEntity containing the User.
      */
-    @GetMapping(value = "/get/{userId}",  produces = "application/json")
+    @GetMapping(value = "/get/{userId}", produces = "application/json")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserById(userId));
