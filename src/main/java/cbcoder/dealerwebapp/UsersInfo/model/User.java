@@ -1,5 +1,6 @@
 package cbcoder.dealerwebapp.UsersInfo.model;
 
+import cbcoder.dealerwebapp.Cars.model.Car;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -68,6 +69,10 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "roles_ROLE_ID"))
     private Set<Role> roles = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
+    private Set<Car> cars = new LinkedHashSet<>();
 
     public User() {
     }
@@ -165,6 +170,14 @@ public class User implements Serializable {
         return this.firstName + " " + this.lastName;
     }
 
+    public Set<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -189,6 +202,7 @@ public class User implements Serializable {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", roles=" + roles +
+                ", cars=" + cars +
                 '}';
     }
 }

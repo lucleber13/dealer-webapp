@@ -1,4 +1,4 @@
-package cbcoder.dealerwebapp.UsersInfo.exceptions;
+package cbcoder.dealerwebapp.exceptions;
 
 public class NotAuthorizedAccessException extends RuntimeException {
     public NotAuthorizedAccessException(String s) {

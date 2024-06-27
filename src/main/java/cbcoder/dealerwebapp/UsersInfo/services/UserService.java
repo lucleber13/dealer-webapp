@@ -5,17 +5,16 @@ import cbcoder.dealerwebapp.UsersInfo.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface UserService {
 
-	User updateUser(Long userId, UserDto userDto);
+    User updateUser(Long userId, UserDto userDto);
 
-	String deleteUser(Long userId);
+    String deleteUser(Long userId);
 
-	Page<User> getAllUsers(Pageable pageable);
+    Page<User> getAllUsers(Pageable pageable);
 
-	User getUserById(Long userId);
+    User getUserById(Long userId);
 
-	User adminUpdateUser(Long userId, UserDto userDto);
+    User adminUpdateUser(Long userId, UserDto userDto);
 }

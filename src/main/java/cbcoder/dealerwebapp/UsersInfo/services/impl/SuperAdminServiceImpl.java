@@ -1,13 +1,13 @@
 package cbcoder.dealerwebapp.UsersInfo.services.impl;
 
 import cbcoder.dealerwebapp.UsersInfo.Dtos.UserDto;
-import cbcoder.dealerwebapp.UsersInfo.exceptions.*;
 import cbcoder.dealerwebapp.UsersInfo.model.Role;
 import cbcoder.dealerwebapp.UsersInfo.model.User;
 import cbcoder.dealerwebapp.UsersInfo.model.enums.RoleEnum;
 import cbcoder.dealerwebapp.UsersInfo.repositories.RoleRepository;
 import cbcoder.dealerwebapp.UsersInfo.repositories.UserRepository;
 import cbcoder.dealerwebapp.UsersInfo.services.SuperAdminService;
+import cbcoder.dealerwebapp.exceptions.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -103,6 +103,21 @@ public class SuperAdminServiceImpl implements SuperAdminService {
         }
     }
 
+    /**
+     * This method only has the accesses to the super admin to create a super admin.
+     * The userDto will be passed as a parameter.
+     * The userDto will have the email, password, first name, and last name of the user.
+     * The method will check if the user is super admin or not.
+     * If the user is not super admin, then it will throw an exception.
+     * If the user is super admin, then it will check if the user is already in the database or not.
+     * If the user is already in the database, then it will get the user information.
+     * If the user is not in the database, then it will create a new user and set the user information.
+     * The super admin role will be added to the user and save the user information.
+     * The created user information will be returned.
+     *
+     * @param userDto The userDto will have the email, password, first name, and last name of the user.
+     * @return The created user information.
+     */
     @Override
     public User createSuperAdmin(UserDto userDto) {
         Authentication authentication = getAuthentication();
@@ -128,6 +143,23 @@ public class SuperAdminServiceImpl implements SuperAdminService {
         return userRepository.save(user);
     }
 
+    /**
+     * This method only has the accesses to the super admin to delete the super admin role from the user.
+     * The user id will be passed as a parameter.
+     * The method will check if the user is super admin or not.
+     * If the user is not super admin, then it will throw an exception.
+     * If the user is super admin, then it will check if the user email is matched with the current principal name.
+     * If the email is matched, then it will throw an exception.
+     * Because the super admin cannot delete their own role.
+     * If the email is not matched, then it will check if the user has the super admin role or not.
+     * If the user does not have the super admin role, then it will throw an exception.
+     * If the user has the super admin role, then it will check the super admin count in the database.
+     * If the super admin count is less than 2, then it will throw an exception.
+     * Because at least one super admin should be in the database.
+     * If the super admin count is greater than 1, then it will delete the user information.
+     *
+     * @param userId The user id to delete the super admin role from the user.
+     */
     @Override
     public void deleteSuperAdminRole(Long userId) {
         Authentication authentication = getAuthentication();
@@ -152,6 +184,22 @@ public class SuperAdminServiceImpl implements SuperAdminService {
         }
     }
 
+    /**
+     * This method only has the accesses to the super admin to revoke the super admin role from the user.
+     * The user id will be passed as a parameter.
+     * The method will check if the user is super admin or not.
+     * If the user is not super admin, then it will throw an exception.
+     * If the user is super admin, then it will check if the user has the super admin role or not.
+     * If the user does not have the super admin role, then it will throw an exception.
+     * If the user has the super admin role, then it will check if the user has only one role or not.
+     * If the user has only one role, then it will throw an exception.
+     * If the user has more than one role,
+     * then it will remove the super admin role from the user and save the user information.
+     * The updated user information will be returned.
+     *
+     * @param userId The user id to revoke the super admin role from the user.
+     * @return The updated user information.
+     */
     @Override
     public User revokeSuperAdminRole(Long userId) {
         Authentication authentication = getAuthentication();

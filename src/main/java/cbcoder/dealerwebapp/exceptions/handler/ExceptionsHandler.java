@@ -1,6 +1,6 @@
-package cbcoder.dealerwebapp.UsersInfo.exceptions.handler;
+package cbcoder.dealerwebapp.exceptions.handler;
 
-import cbcoder.dealerwebapp.UsersInfo.exceptions.*;
+import cbcoder.dealerwebapp.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -108,6 +108,22 @@ public class ExceptionsHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(SuperAdminCountException.class)
     public Map<String, String> handleSuperAdminCountException(SuperAdminCountException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put(MESSAGE, ex.getMessage());
+        return errors;
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(CarAlreadyExistsException.class)
+    public Map<String, String> handleCarAlreadyExistsException(CarAlreadyExistsException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put(MESSAGE, ex.getMessage());
+        return errors;
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(CarNotFoundException.class)
+    public Map<String, String> handleCarNotFoundException(CarNotFoundException ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put(MESSAGE, ex.getMessage());
         return errors;

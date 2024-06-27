@@ -1,5 +1,6 @@
-package cbcoder.dealerwebapp.UsersInfo.security.config;
+package cbcoder.dealerwebapp.globalConfig;
 
+import cbcoder.dealerwebapp.UsersInfo.security.config.JwtAuthFilter;
 import cbcoder.dealerwebapp.UsersInfo.services.UserSecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * SecurityConfig class is the configuration class for the security of the application. It is responsible for configuring the security of the application.
- * In the class SecurityConfig has added an annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
+ * In the class, SecurityConfig has added an annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
  * This annotation is used to enable Spring Data Web Support for the application.
  * It is used to configure the page serialization mode for Spring Data Web Support. When using Page serialization mode VIA_DTO,
  * the Pageable argument in the controller methods will be serialized to a DTO object. This way avoiding the response
@@ -66,8 +67,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         logger.info("SecurityConfig.filterChain(HttpSecurity http) called");
         return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable) // Disabled CSRF (Cross-Site Request Forgery).
+                .cors(AbstractHttpConfigurer::disable) // Disabled CORS (Cross-Origin Resource Sharing).
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/auth/**").permitAll()
@@ -75,12 +76,16 @@ public class SecurityConfig {
                                 .requestMatchers("/users/**").hasAnyRole("SUPERADMIN", "ADMIN", "SALES", "WORKSHOP", "VALETER")
                                 .requestMatchers("/superadmin/**").hasRole("SUPERADMIN")
                                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                                .requestMatchers("/cars/create/**").hasAnyRole("ADMIN", "SALES")
+                                .requestMatchers("/cars/delete/**").hasAnyRole("ADMIN", "SALES")
+                                .requestMatchers("/cars/**").hasAnyRole("ADMIN", "SALES", "WORKSHOP", "VALETER")
                                 .anyRequest()
                                 .authenticated())
+                // Session management configuration.
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // Add the JwtAuthFilter before the UsernamePasswordAuthenticationFilter.
+                .build(); // Build the SecurityFilterChain.
     }
 
     /**
@@ -88,15 +93,20 @@ public class SecurityConfig {
      * The AuthenticationProvider object is responsible for authenticating the user.
      * The AuthenticationProvider object will use the UserSecurityService object to retrieve the user information.
      * The AuthenticationProvider object will use the PasswordEncoder object to encode the password.
-     * This get the principal and credentials from the Authentication object and returns a fully authenticated Authentication object.
+     * This gets the principal and credentials from the Authentication object
+     * and returns a fully authenticated Authentication object.
      *
      * @return an AuthenticationProvider object.
      */
     @Bean
     public AuthenticationProvider authenticationProvider() {
+        // Create a DaoAuthenticationProvider object.
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        // Set the UserDetailsService object to the UserSecurityService object.
         provider.setUserDetailsService(userSecurityService.userDetailsService());
+        // Set the PasswordEncoder object to the PasswordEncoder object.
         provider.setPasswordEncoder(passwordEncoder());
+        // Return the AuthenticationProvider object.
         return provider;
     }
 
@@ -110,6 +120,7 @@ public class SecurityConfig {
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // Return a BCryptPasswordEncoder object.
         return new BCryptPasswordEncoder();
     }
 
@@ -124,6 +135,7 @@ public class SecurityConfig {
      */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        // Return the AuthenticationManager object.
         return configuration.getAuthenticationManager();
     }
 
