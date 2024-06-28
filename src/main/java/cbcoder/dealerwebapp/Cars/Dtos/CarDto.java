@@ -3,7 +3,6 @@ package cbcoder.dealerwebapp.Cars.Dtos;
 import cbcoder.dealerwebapp.Cars.enums.CarStatus;
 import cbcoder.dealerwebapp.Cars.enums.ValeterStatus;
 import cbcoder.dealerwebapp.Cars.enums.WorkshopServiceStatus;
-import cbcoder.dealerwebapp.Cars.model.Car;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -15,7 +14,19 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * DTO for {@link Car}
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
+ * Data Transfer Object for Car entity class to transfer data between the service and the controller.
+ * It is used to hide the inner details of the Car entity class.
+ * It is used to transfer data between the service and the controller.
+ * One observation is about the User entity called userId.
+ * It is used to store the id of the user who created the car.
+ * Passed the userId as a parameter to the constructor to set the userId.
+ * So, when it is used in the service layer, the userId is set to the user who created the car.
+ * Hiding the user details on the client side.
  */
 public class CarDto implements Serializable {
     private Long carId;

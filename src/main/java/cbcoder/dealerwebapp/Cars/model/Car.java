@@ -18,6 +18,23 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
+ * The Car class represents a car entity in the database.
+ * It includes details about the car such as make, model, color, registration number, chassis number, key number,
+ * creation and update dates, handover date, buyer name, comments,
+ * car status, workshop service status, valeter status, and associated users.
+ * It is a JPA entity class and is mapped to the "CARS" table in the database.
+ *
+ * @author Cleber Balbinote
+ * @version 1.0
+ * @since 2024-06-15
+ */
+
 @Entity
 @Table(name = "CARS")
 @SequenceGenerator(name = "cars_seq", sequenceName = "cars_seq", allocationSize = 1)

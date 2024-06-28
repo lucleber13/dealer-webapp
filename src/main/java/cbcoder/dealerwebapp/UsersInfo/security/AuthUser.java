@@ -9,6 +9,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * AuthUser class implements UserDetails interface and provides the user details to the Spring Security framework.
  * It is used to authenticate and authorize the user.
  * It provides the user details like username, password, authorities, account status, etc.

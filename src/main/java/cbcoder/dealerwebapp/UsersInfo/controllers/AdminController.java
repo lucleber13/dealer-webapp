@@ -11,6 +11,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
+ * AdminController class is a RestController class.
+ * It provides the endpoints for the admin to interact with the users.
+ * The class is annotated with @RestController to indicate that it is a controller class.
+ * The class is annotated with @RequestMapping to indicate the base path for the endpoints.
+ * The class has a constructor that injects the UserService dependency.
+ * The class has methods that provide the endpoints for the admin to interact with the users.
+ *
+ * @author Cleber Balbinote
+ * @version 1.0
+ * @see UserService
+ * @see RestController
+ * @see RequestMapping
+ * @see PreAuthorize
+ * @since 2024-06-15
+ */
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

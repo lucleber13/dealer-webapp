@@ -22,6 +22,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * SecurityConfig class is the configuration class for the security of the application. It is responsible for configuring the security of the application.
  * In the class, SecurityConfig has added an annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
  * This annotation is used to enable Spring Data Web Support for the application.
@@ -30,11 +35,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * with json well formatted.
  * The class also has a method filterChain(HttpSecurity http) that is responsible for configuring the security of the application.
  *
- * @author : Cleber Blabinote
+ * @author Cleber Blabinote
  * @version 1.0
- * @since : 15/06/2024
+ * @since 2024-06-27
  */
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

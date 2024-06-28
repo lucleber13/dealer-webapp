@@ -14,6 +14,11 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * JwtServiceImpl class implements JwtService interface and provides methods to generate and validate JWT tokens.
  * It uses JJWT library to generate and validate JWT tokens.
  *

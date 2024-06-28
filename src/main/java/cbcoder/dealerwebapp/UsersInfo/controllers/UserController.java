@@ -12,6 +12,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * UserController class is the controller class for the User entity. It is responsible for handling the HTTP requests for the User entity.
  * In the class SecurityConfig has added an annotation @EnableSpringDataWebSupport to enable Spring Data Web Support.
  * This annotation is used to enable Spring Data Web Support for the application.
@@ -19,32 +24,32 @@ import org.springframework.web.bind.annotation.*;
  * the Pageable argument in the controller methods will be serialized to a DTO object. This way avoiding the response
  * with json well formatted.
  *
- * @author : Cleber Blabinote
+ * @author Cleber Blabinote
  * @version 1.0
- * @since : 15/06/2024
+ * @since 2024-06-15
  */
-
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
-	private final UserService userService;
+    private final UserService userService;
 
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-	/**
-	 * This method is responsible for getting a user by its id.
-	 * This method allows access to users with the roles 'ROLE_ADMIN', 'ROLE_SALES', 'ROLE_WORKSHOP' and 'ROLE_VALETER'.
-	 * The user with the role 'ROLE_ADMIN' can access any user, while the other roles can only access their own user.
-	 *
-	 * @param userId determines the id of the user to be returned.
-	 * @return a ResponseEntity containing the User.
-	 */
-	@PutMapping(value = "/{userId}", produces = "application/json")
-	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALES', 'ROLE_WORKSHOP', 'ROLE_VALETER')")
-	public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
-		return ResponseEntity.ok(userService.updateUser(userId, userDto));
-	}
+    /**
+     * This method is responsible for getting a user by its id.
+     * This method allows access to users with the roles 'ROLE_ADMIN', 'ROLE_SALES', 'ROLE_WORKSHOP' and 'ROLE_VALETER'.
+     * The user with the role 'ROLE_ADMIN' can access any user, while the other roles can only access their own user.
+     *
+     * @param userId determines the id of the user to be returned.
+     * @return a ResponseEntity containing the User.
+     */
+    @PutMapping(value = "/{userId}", produces = "application/json")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_SALES', 'ROLE_WORKSHOP', 'ROLE_VALETER')")
+    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+        return ResponseEntity.ok(userService.updateUser(userId, userDto));
+    }
 }

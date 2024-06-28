@@ -17,6 +17,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * Filter to intercept requests and validate JWT tokens in the Authorization header.
  * If the token is valid, the user is authenticated and added to the SecurityContext.
  * The filter is added to the Spring Security filter chain in the SecurityConfig class.

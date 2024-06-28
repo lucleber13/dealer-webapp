@@ -26,6 +26,11 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * UserServiceImpl class implements UserService interface and provides the implementation of the methods declared in the interface.
  * In this class, we have implemented the methods to update, delete, get all and get user by id.
  * But to access these methods, for example, will be determined by the role of the user.

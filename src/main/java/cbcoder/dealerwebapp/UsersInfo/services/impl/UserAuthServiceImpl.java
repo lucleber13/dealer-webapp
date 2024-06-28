@@ -24,6 +24,11 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * The UserAuthServiceImpl class implements the UserAuthService interface and provides methods to register a new user,
  * log in a user and refresh the JWT token.
  * The class uses the UserRepository, PasswordEncoder, JwtService, AuthenticationManager, RoleRepository and ModelMapper
@@ -39,7 +44,6 @@ import java.util.Set;
  * @implNote The class uses the UserRepository, PasswordEncoder, JwtService, AuthenticationManager, RoleRepository and ModelMapper to provide the services.
  * @since 2024-06-15
  */
-
 @Service
 public class UserAuthServiceImpl implements UserAuthService {
 

@@ -17,6 +17,27 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
+ * User class represents the User entity.
+ * It is mapped to the USERS table in the database.
+ * The class is annotated with the @Entity annotation to indicate that it is a JPA entity.
+ * The @Table annotation specifies the name of the table in the database.
+ * The class is also annotated with the @SequenceGenerator annotation
+ * to generate the primary key values which started initial value 2.
+ * The class implements the Serializable interface to make the User objects serializable.
+ * The class has fields for the user id, first name, last name, email, password, isEnabled, createdAt, updatedAt, roles, and cars.
+ *
+ * @author Cleber Balbinote
+ * @version 1.0
+ * @see Role
+ * @see Car
+ * @since 2024-06-15
+ */
 @Entity
 @Table(name = "USERS")
 @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1, initialValue = 2)

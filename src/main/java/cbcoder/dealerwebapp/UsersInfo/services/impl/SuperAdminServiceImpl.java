@@ -17,6 +17,11 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
  * SuperAdminServiceImpl class implements SuperAdminService interface and provides the implementation of the methods declared in the interface.
  * In this class, we have implemented the methods to add and revoke the admin role to the user.
  * The super admin will have the authority to add and revoke the admin role to the user.

@@ -8,6 +8,22 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+/**
+ * <p>Copyright (c) 2024, Cleber Balbinote.</p>
+ * <p>All rights reserved.</p>
+ * <p>Licensed under the MIT License.</p>
+ * <p>For full license text, please see the LICENSE file in the repo root or <a href="https://opensource.org/licenses/MI">...</a>T</p>
+ * </br>
+ * CarService interface for CarService implementation class
+ * to implement the methods for CarService operations on the Car entity.
+ * The methods are used to create, update, delete, get, and search for cars.
+ * Also, the methods are used to get cars by model, buyer name, and user.
+ *
+ * @author Cleber Balbinote
+ * @version 1.0
+ * @see CarDto
+ * @since 2024-06-27
+ */
 public interface CarService {
     CarDto createCar(CarDto carDto);
 
